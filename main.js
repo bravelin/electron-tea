@@ -2,6 +2,9 @@ const electron = require('electron')
 const { app, BrowserWindow } = electron
 let mainWindow
 const Menu = electron.Menu
+app.commandLine.appendSwitch('ppapi-flash-path',app.getPath('pepperFlashSystemPlugin'))
+app.commandLine.appendSwitch('ppapi-flash-version', '31.0.0.122')
+
 function createWindow () {
     Menu.setApplicationMenu(null)
     mainWindow = new BrowserWindow({
@@ -15,10 +18,12 @@ function createWindow () {
         title: '武夷山市智慧茗园数据平台',
         titleBarStyle: "hiddenInset",
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            plugins: true
         }
     })
-    mainWindow.loadURL('http://tea.yufengtek.com')
+    // mainWindow.loadURL('http://tea.yufengtek.com/#/login?flash=true')
+    mainWindow.loadURL('http://wy.yufengtek.com/#/login?flash=true')
     // mainWindow.loadURL('http://localhost:8066')
     mainWindow.once('ready-to-show', () => {
         mainWindow.show()
